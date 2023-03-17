@@ -166,16 +166,21 @@
 				<key>runningsubtext</key>
 				<string>Please wait…</string>
 				<key>script</key>
-				<string>ObjC.import('stdlib')
+				<string>function envVar(varName) {
+  return $.NSProcessInfo
+    .processInfo
+    .environment
+    .objectForKey(varName).js
+}
 
 function run(argv) {
-  const origExtension = $.getenv("origExtension") 
+  const origExtension = envVar("origExtension") 
   const newExtension = origExtension.length === 0 ? "" : "." + origExtension
 
   const newBasenameNoExtension = argv[0]
-  const newFullPath = $.getenv("origDirname") + "/" + newBasenameNoExtension + newExtension
+  const newFullPath = envVar("origDirname") + "/" + newBasenameNoExtension + newExtension
   
-  if (newBasenameNoExtension === $.getenv("origBasenameNoExtension")) {
+  if (newBasenameNoExtension === envVar("origBasenameNoExtension")) {
     return JSON.stringify({ "items": [{
       "title": "Rename to",
       "subtitle": "File extension is preserved",
@@ -183,17 +188,17 @@ function run(argv) {
     }]})
   }
   
-  if (Application('Finder').exists(Path(newFullPath))) {
+  if ($.NSFileManager.defaultManager.fileExistsAtPath(newFullPath)) {
     return JSON.stringify({ "items": [{
       "title": "Path already exists!",
-      "subtitle": newFullPath,
+      "subtitle": $(newFullPath).stringByAbbreviatingWithTildeInPath.js,
       "valid": false
     }]})
   }
   
   return JSON.stringify({ "items": [{
     "title": "Rename to",
-    "subtitle": newFullPath,
+    "subtitle": $(newFullPath).stringByAbbreviatingWithTildeInPath.js,
     "valid": true,
     "arg": newFullPath
   }]})
@@ -496,7 +501,7 @@ Press &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; at any state to reope
 	<key>userconfigurationconfig</key>
 	<array/>
 	<key>version</key>
-	<string>2023.1</string>
+	<string>2023.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/vitorgalvao/rename-action-workflow/</string>
 </dict>
