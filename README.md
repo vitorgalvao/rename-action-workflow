@@ -2,7 +2,7 @@
 
 Rename files and folders
 
-<a href='https://alfred.app/workflows/vitor/rename-action'>⤓ Install From the Alfred Gallery</a>
+<a href='https://alfred.app/workflows/vitor/rename-action'>⤓ Install on the Alfred Gallery</a>
 
 ## Usage
 
@@ -11,3 +11,5 @@ Rename a file or folder via the [Universal Action](https://www.alfredapp.com/hel
 ![Rename action](Workflow/images/about/ua.png)
 
 ![Choosing new file name](Workflow/images/about/rename.png)
+
+Press <kbd>⌘</kbd><kbd>↩&#xFE0E;</kbd> at any state to reopen the Universal Actions panel after renaming.

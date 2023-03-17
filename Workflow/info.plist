@@ -29,6 +29,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3263DF37-2A1F-486F-BCC1-E902E59320DC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D6AD9678-C017-40CD-BD91-5E4102C39AD3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4B30C050-DEC1-4375-8B11-20FA04A89596</key>
 		<array>
 			<dict>
@@ -38,6 +51,44 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Reopen Universal Actions after renaming</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2D996A5F-76DB-4596-BAC7-C918B0EFD902</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A6B5E6E1-D926-4D07-A505-6821DDD8AD23</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9D441C22-CD20-4CCA-8CF2-8AC879F994A1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>084A03F0-9303-4D0B-8E6A-1969BC7CB1DE</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -54,9 +105,30 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3263DF37-2A1F-486F-BCC1-E902E59320DC</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Reopen Universal Actions after renaming</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>D6AD9678-C017-40CD-BD91-5E4102C39AD3</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6B5E6E1-D926-4D07-A505-6821DDD8AD23</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Vítor Galvão</string>
@@ -68,29 +140,6 @@
 	<string>Rename Action</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>mv "${origFullPath}" "${1}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D6AD9678-C017-40CD-BD91-5E4102C39AD3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -175,6 +224,69 @@ function run(argv) {
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>readonly newFullPath="${1}"
+
+# Rename
+mv "${origFullPath}" "${newFullPath}"
+
+# Send to reopen Universal Actions
+echo -n "${newFullPath}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D6AD9678-C017-40CD-BD91-5E4102C39AD3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>jumpto</key>
+				<string>_popUpItemAction:</string>
+				<key>path</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>9D441C22-CD20-4CCA-8CF2-8AC879F994A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Rename</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>4B30C050-DEC1-4375-8B11-20FA04A89596</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
 				<string>function run(argv) {
@@ -212,17 +324,32 @@ function run(argv) {
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Rename</string>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:reopen_ua}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>5</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>Reopen Universal Actions</string>
+						<key>uid</key>
+						<string>084A03F0-9303-4D0B-8E6A-1969BC7CB1DE</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>4B30C050-DEC1-4375-8B11-20FA04A89596</string>
+			<string>A6B5E6E1-D926-4D07-A505-6821DDD8AD23</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -247,6 +374,46 @@ function run(argv) {
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>reopen_ua</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>3263DF37-2A1F-486F-BCC1-E902E59320DC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>reopen_ua</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -255,15 +422,24 @@ Rename a file or folder via the [Universal Action](https://www.alfredapp.com/hel
 
 ![Rename action](images/about/ua.png)
 
-![Choosing new file name](images/about/rename.png)</string>
+![Choosing new file name](images/about/rename.png)
+
+Press &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; at any state to reopen the Universal Actions panel after renaming.</string>
 	<key>uidata</key>
 	<dict>
 		<key>2D996A5F-76DB-4596-BAC7-C918B0EFD902</key>
 		<dict>
 			<key>xpos</key>
-			<real>225</real>
+			<real>315</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>3263DF37-2A1F-486F-BCC1-E902E59320DC</key>
+		<dict>
+			<key>xpos</key>
+			<real>695</real>
+			<key>ypos</key>
+			<real>150</real>
 		</dict>
 		<key>4B30C050-DEC1-4375-8B11-20FA04A89596</key>
 		<dict>
@@ -272,26 +448,47 @@ Rename a file or folder via the [Universal Action](https://www.alfredapp.com/hel
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
+		<key>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</key>
+		<dict>
+			<key>xpos</key>
+			<real>215</real>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
 		<key>947A1C83-3935-488B-BBBC-A01B072DD9A0</key>
 		<dict>
 			<key>note</key>
 			<string>Select argument</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>515</real>
 			<key>ypos</key>
 			<real>150</real>
+		</dict>
+		<key>9D441C22-CD20-4CCA-8CF2-8AC879F994A1</key>
+		<dict>
+			<key>xpos</key>
+			<real>1040</real>
+			<key>ypos</key>
+			<real>20</real>
+		</dict>
+		<key>A6B5E6E1-D926-4D07-A505-6821DDD8AD23</key>
+		<dict>
+			<key>xpos</key>
+			<real>960</real>
+			<key>ypos</key>
+			<real>50</real>
 		</dict>
 		<key>D307CADD-36C3-4EF0-98C3-1CA47407436A</key>
 		<dict>
 			<key>xpos</key>
-			<real>425</real>
+			<real>515</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
 		<key>D6AD9678-C017-40CD-BD91-5E4102C39AD3</key>
 		<dict>
 			<key>xpos</key>
-			<real>625</real>
+			<real>795</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -299,7 +496,7 @@ Rename a file or folder via the [Universal Action](https://www.alfredapp.com/hel
 	<key>userconfigurationconfig</key>
 	<array/>
 	<key>version</key>
-	<string>2022.2</string>
+	<string>2023.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/vitorgalvao/rename-action-workflow/</string>
 </dict>
