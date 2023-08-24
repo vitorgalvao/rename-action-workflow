@@ -2,7 +2,7 @@
 
 Rename files and folders
 
-<a href='https://alfred.app/workflows/vitor/rename-action'>⤓ Install on the Alfred Gallery</a>
+[⤓ Install on the Alfred Gallery](https://alfred.app/workflows/vitor/rename-action)
 
 ## Usage
 
