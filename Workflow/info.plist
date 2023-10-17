@@ -52,7 +52,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -62,7 +62,7 @@
 				<key>modifiersubtext</key>
 				<string>Reopen Universal Actions after renaming</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</key>
@@ -92,6 +92,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>48FDA58D-21D7-4A6A-BDD2-8FA41E953AA3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>D307CADD-36C3-4EF0-98C3-1CA47407436A</key>
 		<array>
@@ -103,7 +113,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -113,7 +123,7 @@
 				<key>modifiersubtext</key>
 				<string>Reopen Universal Actions after renaming</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>D6AD9678-C017-40CD-BD91-5E4102C39AD3</key>
@@ -341,20 +351,28 @@ echo -n "${newFullPath}"</string>
 						<key>matchstring</key>
 						<string></string>
 						<key>outputlabel</key>
-						<string>Reopen Universal Actions</string>
+						<string>Universal Actions</string>
 						<key>uid</key>
 						<string>084A03F0-9303-4D0B-8E6A-1969BC7CB1DE</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>else</string>
+				<string>Stop</string>
 				<key>hideelse</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>A6B5E6E1-D926-4D07-A505-6821DDD8AD23</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>48FDA58D-21D7-4A6A-BDD2-8FA41E953AA3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -446,6 +464,13 @@ Press &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; at any state to reope
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
+		<key>48FDA58D-21D7-4A6A-BDD2-8FA41E953AA3</key>
+		<dict>
+			<key>xpos</key>
+			<real>1180</real>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
 		<key>4B30C050-DEC1-4375-8B11-20FA04A89596</key>
 		<dict>
 			<key>xpos</key>
@@ -472,7 +497,7 @@ Press &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; at any state to reope
 		<key>9D441C22-CD20-4CCA-8CF2-8AC879F994A1</key>
 		<dict>
 			<key>xpos</key>
-			<real>1040</real>
+			<real>1140</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -481,7 +506,7 @@ Press &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; at any state to reope
 			<key>xpos</key>
 			<real>960</real>
 			<key>ypos</key>
-			<real>50</real>
+			<real>40</real>
 		</dict>
 		<key>D307CADD-36C3-4EF0-98C3-1CA47407436A</key>
 		<dict>
