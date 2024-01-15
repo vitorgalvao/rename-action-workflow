@@ -200,14 +200,14 @@ function run(argv) {
   
   if ($.NSFileManager.defaultManager.fileExistsAtPath(newFullPath)) {
     return JSON.stringify({ "items": [{
-      "title": "Path already exists!",
+      "title": "Path Exists!",
       "subtitle": $(newFullPath).stringByAbbreviatingWithTildeInPath.js,
       "valid": false
     }]})
   }
   
   return JSON.stringify({ "items": [{
-    "title": "Rename to",
+    "title": "Rename To",
     "subtitle": $(newFullPath).stringByAbbreviatingWithTildeInPath.js,
     "valid": true,
     "arg": newFullPath
@@ -220,7 +220,7 @@ function run(argv) {
 				<key>subtext</key>
 				<string>Path extension is preserved</string>
 				<key>title</key>
-				<string>Rename to</string>
+				<string>Rename To</string>
 				<key>type</key>
 				<integer>7</integer>
 				<key>withspace</key>
