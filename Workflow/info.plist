@@ -389,11 +389,11 @@ echo -n "${newFullPath}"</string>
 				<key>count</key>
 				<integer>1</integer>
 				<key>keychar</key>
-				<string>←</string>
+				<string>a</string>
 				<key>keycode</key>
-				<integer>123</integer>
+				<integer>-1</integer>
 				<key>keymod</key>
-				<integer>11665408</integer>
+				<integer>1048576</integer>
 				<key>overridewithargument</key>
 				<false/>
 			</dict>
