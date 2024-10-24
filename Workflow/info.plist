@@ -184,20 +184,18 @@
 }
 
 function run(argv) {
-  const origExtension = envVar("origExtension") 
-  const newExtension = origExtension.length === 0 ? "" : "." + origExtension
-
   const newBasenameNoExtension = argv[0]
-  const newFullPath = envVar("origDirname") + "/" + newBasenameNoExtension + newExtension
-  
+  const isFolder = envVar("treatAsFolder") === "1"
+  const newFullPath = envVar("origDirname") + "/" + newBasenameNoExtension + envVar("origExtension")
+
   if (newBasenameNoExtension === envVar("origBasenameNoExtension")) {
     return JSON.stringify({ "items": [{
       "title": "Rename To",
-      "subtitle": "File extension is preserved",
+      "subtitle": isFolder ? "Type the new name" : "File extension is preserved",
       "valid": false
     }]})
   }
-  
+
   if ($.NSFileManager.defaultManager.fileExistsAtPath(newFullPath)) {
     return JSON.stringify({ "items": [{
       "title": "Path Exists!",
@@ -205,7 +203,7 @@ function run(argv) {
       "valid": false
     }]})
   }
-  
+
   return JSON.stringify({ "items": [{
     "title": "Rename To",
     "subtitle": $(newFullPath).stringByAbbreviatingWithTildeInPath.js,
@@ -234,6 +232,83 @@ function run(argv) {
 			<string>D307CADD-36C3-4EF0-98C3-1CA47407436A</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Rename</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>4B30C050-DEC1-4375-8B11-20FA04A89596</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function isDir(pathString) {
+  return $.NSFileManager.defaultManager
+    .attributesOfItemAtPathError(pathString, undefined)
+    .js["NSFileType"].js === "NSFileTypeDirectory"
+}
+
+function isPackage(pathString) {
+  return $.NSURL.fileURLWithPath(pathString)
+    .resourceValuesForKeysError([$.NSURLIsPackageKey.js], undefined)
+    .js["NSURLIsPackageKey"].js
+}
+
+function run(argv) {
+  const fullPathString = argv[0]
+  const fullPath = $(fullPathString)
+  const isFolder = isDir(fullPathString) &amp;&amp; !isPackage(fullPathString)
+
+  const basename = fullPath.lastPathComponent
+  const pathExt = fullPath.pathExtension
+  const pathExtString = pathExt.js
+  const dirnameString = fullPath.stringByDeletingLastPathComponent.js
+
+  const basenameNoExtString = isFolder ? basename.js : basename.stringByDeletingPathExtension.js
+  const extString = pathExtString.length &gt; 0 &amp;&amp; !isFolder ? `.${pathExtString}` : ""
+
+  return JSON.stringify({
+    "alfredworkflow" : {
+      "arg": basenameNoExtString,
+      "variables": {
+        "treatAsFolder": isFolder,
+        "origFullPath": fullPathString,
+        "origDirname": dirnameString,
+        "origBasenameNoExtension": basenameNoExtString,
+        "origExtension": extString
+      }
+    }
+  })
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2D996A5F-76DB-4596-BAC7-C918B0EFD902</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -284,63 +359,6 @@ echo -n "${newFullPath}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Rename</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>4B30C050-DEC1-4375-8B11-20FA04A89596</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>function run(argv) {
-  const fullPath = argv[0]
-  const dirname = $(fullPath).stringByDeletingLastPathComponent.js
-  const basenameNoExtension = $(fullPath).lastPathComponent.stringByDeletingPathExtension.js
-  const extension = $(fullPath).pathExtension.js
-
-  return JSON.stringify({
-    "alfredworkflow" : {
-      "arg": basenameNoExtension,
-      "variables": {
-        "origFullPath": fullPath,
-        "origDirname": dirname,
-        "origBasenameNoExtension": basenameNoExtension,
-        "origExtension": extension
-      }
-    }
-  })
-}</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>7</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2D996A5F-76DB-4596-BAC7-C918B0EFD902</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -373,6 +391,26 @@ echo -n "${newFullPath}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>reopen_ua</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>3263DF37-2A1F-486F-BCC1-E902E59320DC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>unstackview</key>
 				<false/>
 			</dict>
@@ -380,6 +418,26 @@ echo -n "${newFullPath}"</string>
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
 			<string>48FDA58D-21D7-4A6A-BDD2-8FA41E953AA3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>reopen_ua</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -401,46 +459,6 @@ echo -n "${newFullPath}"</string>
 			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
 			<string>947A1C83-3935-488B-BBBC-A01B072DD9A0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>reopen_ua</key>
-					<string>true</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>3263DF37-2A1F-486F-BCC1-E902E59320DC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>reopen_ua</key>
-					<string>true</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
