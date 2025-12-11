@@ -236,6 +236,52 @@ function run(argv) {
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>readonly newFullPath="${1}"
+
+# Rename
+mv "${origFullPath}" "${newFullPath}"
+
+# Send to reopen Universal Actions
+echo -n "${newFullPath}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D6AD9678-C017-40CD-BD91-5E4102C39AD3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>jumpto</key>
+				<string>_popUpItemAction:</string>
+				<key>path</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>9D441C22-CD20-4CCA-8CF2-8AC879F994A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -259,9 +305,9 @@ function run(argv) {
 				<integer>68</integer>
 				<key>script</key>
 				<string>function isDir(pathString) {
-  return $.NSFileManager.defaultManager
-    .attributesOfItemAtPathError(pathString, undefined)
-    .js["NSFileType"].js === "NSFileTypeDirectory"
+  return $.NSURL.fileURLWithPath(pathString)
+    .resourceValuesForKeysError([$.NSURLIsDirectoryKey.js], undefined)
+    .js["NSURLIsDirectoryKey"].js
 }
 
 function isPackage(pathString) {
@@ -313,52 +359,6 @@ function run(argv) {
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>readonly newFullPath="${1}"
-
-# Rename
-mv "${origFullPath}" "${newFullPath}"
-
-# Send to reopen Universal Actions
-echo -n "${newFullPath}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D6AD9678-C017-40CD-BD91-5E4102C39AD3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>jumpto</key>
-				<string>_popUpItemAction:</string>
-				<key>path</key>
-				<string></string>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>9D441C22-CD20-4CCA-8CF2-8AC879F994A1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -391,26 +391,6 @@ echo -n "${newFullPath}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>reopen_ua</key>
-					<string>true</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>3263DF37-2A1F-486F-BCC1-E902E59320DC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>unstackview</key>
 				<false/>
 			</dict>
@@ -418,26 +398,6 @@ echo -n "${newFullPath}"</string>
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
 			<string>48FDA58D-21D7-4A6A-BDD2-8FA41E953AA3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>reopen_ua</key>
-					<string>true</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -459,6 +419,46 @@ echo -n "${newFullPath}"</string>
 			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
 			<string>947A1C83-3935-488B-BBBC-A01B072DD9A0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>reopen_ua</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>3263DF37-2A1F-486F-BCC1-E902E59320DC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>reopen_ua</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
